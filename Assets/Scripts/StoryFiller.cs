@@ -4,8 +4,6 @@ using UnityEngine;
 
 using System;
 
-public GameObject go;
-
 public class StoryNode
 {
     public string History;
@@ -82,35 +80,37 @@ public static class StoryFiller
 
         StoryNode actualEnd = createNode(
             "I hate you. You then went to class. Hooray.",
-            new [] {}
+            new string[] {"Hooray!"}
         );
 
 
-        beginning.NextNode[0] = wentLeft;
+        beginning.NextNode[0] = catChoice1;
         beginning.NextNode[1] = wentRightLol;
 
         wentRightLol.NextNode[0] = catChoice1;
 
-        catChoice1.nextNode[0] = catChoice2;
-        catChoice1.nextNode[1] = catChoice2;
-        catChoice2.nextNode[0] = catChoice3;
-        catChoice3.nextNode[0] = catChoice4;
-        catChoice4.nextNode[0] = catChoice5;
+        catChoice1.NextNode[0] = catChoice2;
+        catChoice1.NextNode[1] = catChoice2;
+        catChoice2.NextNode[0] = catChoice3;
+        catChoice3.NextNode[0] = catChoice4;
+        catChoice4.NextNode[0] = catChoice5;
 
-        catChoice5.nextNode[0] = catConclusion1;
-        catConclusion1.nextNode[0] = catConclusion2;
-        catConclusion2.nextNode[0] = catConclusion3;
-        catConclusion3.nextNode[0] = narratorIsTired;
+        catChoice5.NextNode[0] = catConclusion1;
+        catConclusion1.NextNode[0] = catConclusion2;
+        catConclusion2.NextNode[0] = catConclusion3;
+        catConclusion3.NextNode[0] = narratorIsTired;
 
-        narratorIsTired.nextNode[0] = fakeEndGame;
-        narratorIsTired.nextNode[1] = actualEnd;
-        fakeEndGame.nextNode[0] = actualEnd;
+        narratorIsTired.NextNode[0] = fakeEndGame;
+        narratorIsTired.NextNode[1] = actualEnd;
+        fakeEndGame.NextNode[0] = actualEnd;
 
-        actualEnd.isFinal = true;
+        actualEnd.IsFinal = true;
 
+        return beginning;
     }
 
-    public static createNode(string history, string[] options){
+
+    public static StoryNode createNode(string history, string[] options){
         return new StoryNode
         {
             History = history,
